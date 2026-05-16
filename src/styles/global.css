@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-deep-brown font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1;
+  }
+
+  .prose {
+    @apply max-w-[680px] mx-auto text-base leading-[1.8];
+  }
+
+  .prose h1, .prose h2, .prose h3 {
+    @apply mt-8 mb-4;
+  }
+
+  .prose p {
+    @apply mb-4;
+  }
+
+  .prose img {
+    @apply rounded-xl my-6 max-w-full;
+  }
+
+  .prose ul, .prose ol {
+    @apply mb-4 pl-6;
+  }
+
+  .prose li {
+    @apply mb-1;
+  }
+
+  .prose a {
+    @apply text-warm-orange underline;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-warm-orange pl-4 italic text-warm-gray my-6;
+  }
+
+  .prose code {
+    @apply bg-apricot px-1.5 py-0.5 rounded text-sm;
+  }
+
+  .prose pre {
+    @apply bg-deep-brown text-cream p-4 rounded-xl overflow-x-auto my-6;
+  }
+
+  .prose pre code {
+    @apply bg-transparent p-0 text-cream;
+  }
+}
