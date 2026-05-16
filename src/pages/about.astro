@@ -1,0 +1,30 @@
+---
+import Layout from '../components/Layout.astro';
+---
+
+<Layout title="About - My Blog" description="Learn more about me and this blog">
+  <div class="max-w-2xl mx-auto px-4 py-12">
+    <h1 class="font-serif text-3xl text-center mb-10">About Me</h1>
+    <div class="flex flex-col md:flex-row items-center gap-8 mb-12">
+      <div class="w-32 h-32 rounded-full bg-apricot flex items-center justify-center shadow-md flex-shrink-0">
+        <span class="text-4xl">🙂</span>
+      </div>
+      <div>
+        <h2 class="font-serif text-2xl mb-2">Your Name</h2>
+        <p class="text-warm-gray leading-relaxed">
+          A short bio about yourself. Share your story, interests, and what this blog is about.
+          Replace this text with your own introduction when you're ready.
+        </p>
+      </div>
+    </div>
+    <div>
+      <h2 class="font-serif text-xl mb-4">Interests</h2>
+      <div class="flex flex-wrap gap-2">
+        <span class="bg-apricot text-deep-brown px-3 py-1 rounded-full text-sm">Photography</span>
+        <span class="bg-apricot text-deep-brown px-3 py-1 rounded-full text-sm">Reading</span>
+        <span class="bg-apricot text-deep-brown px-3 py-1 rounded-full text-sm">Travel</span>
+        <span class="bg-apricot text-deep-brown px-3 py-1 rounded-full text-sm">Cooking</span>
+      </div>
+    </div>
+  </div>
+</Layout>

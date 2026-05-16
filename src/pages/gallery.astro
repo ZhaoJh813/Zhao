@@ -1,0 +1,68 @@
+---
+import Layout from '../components/Layout.astro';
+
+const photos = [
+  { src: '/images/gallery/photo1.svg', alt: 'Photo 1' },
+  { src: '/images/gallery/photo2.svg', alt: 'Photo 2' },
+  { src: '/images/gallery/photo3.svg', alt: 'Photo 3' },
+  { src: '/images/gallery/photo4.svg', alt: 'Photo 4' },
+  { src: '/images/gallery/photo1.svg', alt: 'Photo 5' },
+  { src: '/images/gallery/photo2.svg', alt: 'Photo 6' },
+];
+---
+
+<Layout title="Gallery - My Blog" description="A collection of photos and moments">
+  <div class="max-w-5xl mx-auto px-4 py-12">
+    <h1 class="font-serif text-3xl text-center mb-10">Gallery</h1>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="gallery-grid">
+      {photos.map((photo, i) => (
+        <a
+          href={photo.src}
+          class="gallery-item block rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+          data-src={photo.src}
+        >
+          <img src={photo.src} alt={photo.alt} class="w-full h-56 object-cover" loading="lazy" />
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div id="lightbox" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 cursor-pointer">
+    <span id="lightbox-close" class="absolute top-4 right-8 text-white text-4xl">&times;</span>
+    <img id="lightbox-img" src="" alt="" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg" />
+  </div>
+</Layout>
+
+<script>
+  function initLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const closeBtn = document.getElementById('lightbox-close');
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const el = e.currentTarget as HTMLAnchorElement;
+        lightboxImg.src = el.dataset.src || '';
+        lightbox!.classList.remove('hidden');
+        lightbox!.classList.add('flex');
+      });
+    });
+
+    function closeLightbox() {
+      lightbox!.classList.add('hidden');
+      lightbox!.classList.remove('flex');
+    }
+
+    lightbox!.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    closeBtn!.addEventListener('click', closeLightbox);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  }
+
+  initLightbox();
+</script>
