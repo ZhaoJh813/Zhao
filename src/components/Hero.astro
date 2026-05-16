@@ -1,0 +1,12 @@
+---
+export interface Props {
+  nickname: string;
+  intro: string;
+}
+const { nickname, intro } = Astro.props;
+---
+
+<section class="py-20 px-4 text-center bg-gradient-to-b from-apricot/30 to-cream">
+  <h1 class="font-serif text-4xl md:text-5xl text-deep-brown mb-4">{nickname}</h1>
+  <p class="text-warm-gray text-lg max-w-md mx-auto">{intro}</p>
+</section>
