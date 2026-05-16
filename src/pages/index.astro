@@ -1,11 +1,47 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../components/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import PhotoGrid from '../components/PhotoGrid.astro';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const posts = await getCollection('posts');
+const sortedPosts = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const recentPosts = sortedPosts.slice(0, 6);
+const recentPhotos = [
+  { src: '/images/gallery/photo1.svg', alt: 'Gallery photo 1' },
+  { src: '/images/gallery/photo2.svg', alt: 'Gallery photo 2' },
+  { src: '/images/gallery/photo3.svg', alt: 'Gallery photo 3' },
+  { src: '/images/gallery/photo4.svg', alt: 'Gallery photo 4' },
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="My Blog">
+  <Hero nickname="Your Name" intro="Welcome to my corner of the internet — a place for stories, photos, and quiet moments." />
+
+  <section class="max-w-4xl mx-auto px-4 mt-12">
+    <h2 class="font-serif text-2xl mb-6">Recent Posts</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {recentPosts.length > 0 ? (
+        recentPosts.map(post => (
+          <ArticleCard
+            title={post.data.title}
+            date={post.data.date.toLocaleDateString('zh-CN')}
+            description={post.data.description}
+            slug={post.slug}
+            cover={post.data.cover}
+          />
+        ))
+      ) : (
+        <p class="text-warm-gray col-span-2 text-center py-12">No posts yet. Check back soon!</p>
+      )}
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-4 mt-16 mb-12">
+    <h2 class="font-serif text-2xl mb-6">
+      <a href="/gallery/" class="text-deep-brown hover:text-warm-orange transition-colors no-underline">Recent Photos →</a>
+    </h2>
+    <PhotoGrid photos={recentPhotos} />
+  </section>
 </Layout>
