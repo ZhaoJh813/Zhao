@@ -1,0 +1,30 @@
+---
+import Layout from '../../components/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={`${post.data.title} - My Blog`} description={post.data.description}>
+  <article class="max-w-[680px] mx-auto px-4 py-12">
+    <header class="mb-10 text-center">
+      <time class="text-sm text-warm-gray">{post.data.date.toLocaleDateString('zh-CN')}</time>
+      <h1 class="font-serif text-3xl md:text-4xl mt-2">{post.data.title}</h1>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+    <footer class="mt-16 pt-6 border-t border-apricot">
+      <a href="/posts/" class="text-warm-orange hover:underline font-medium">← Back to all posts</a>
+    </footer>
+  </article>
+</Layout>
