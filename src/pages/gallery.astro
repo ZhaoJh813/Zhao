@@ -1,17 +1,16 @@
 ---
 import Layout from '../components/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
 const photos = [
-  { src: '/images/gallery/photo1.svg', alt: 'Photo 1' },
-  { src: '/images/gallery/photo2.svg', alt: 'Photo 2' },
-  { src: '/images/gallery/photo3.svg', alt: 'Photo 3' },
-  { src: '/images/gallery/photo4.svg', alt: 'Photo 4' },
-  { src: '/images/gallery/photo1.svg', alt: 'Photo 5' },
-  { src: '/images/gallery/photo2.svg', alt: 'Photo 6' },
+  { src: `${base}/images/gallery/p1.jpg`, alt: 'Photo 1' },
+  { src: `${base}/images/gallery/p2.jpg`, alt: 'Photo 2' },
+  { src: `${base}/images/gallery/p3.jpg`, alt: 'Photo 3' },
+  { src: `${base}/images/gallery/p4.jpg`, alt: 'Photo 4' },
 ];
 ---
 
-<Layout title="Gallery - My Blog" description="A collection of photos and moments">
+<Layout title="Gallery - 赵君豪" description="A collection of photos and moments">
   <div class="max-w-5xl mx-auto px-4 py-12">
     <h1 class="font-serif text-3xl text-center mb-10">Gallery</h1>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="gallery-grid">
@@ -21,7 +20,7 @@ const photos = [
           class="gallery-item block rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
           data-src={photo.src}
         >
-          <img src={photo.src} alt={photo.alt} class="w-full h-56 object-cover" loading="lazy" />
+          <img src={photo.src} alt={photo.alt} class="w-full aspect-[3/4] object-cover" loading="lazy" />
         </a>
       ))}
     </div>

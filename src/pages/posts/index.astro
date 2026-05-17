@@ -7,7 +7,7 @@ const posts = await getCollection('posts');
 const sortedPosts = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<Layout title="Posts - My Blog" description="All blog posts">
+<Layout title="Posts - 赵君豪" description="All blog posts">
   <div class="max-w-4xl mx-auto px-4 py-12">
     <h1 class="font-serif text-3xl text-center mb-10">All Posts</h1>
     {sortedPosts.length > 0 ? (
